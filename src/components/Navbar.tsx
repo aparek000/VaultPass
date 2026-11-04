@@ -10,6 +10,7 @@ import {
   Sun,
   Smartphone,
   Laptop,
+  CloudUpload,
 } from 'lucide-react';
 import { ScreenState } from '../types';
 
@@ -17,6 +18,7 @@ interface NavbarProps {
   currentScreen: ScreenState;
   onNavigate: (screen: ScreenState) => void;
   onOpenAdd: () => void;
+  onOpenDeploy: () => void;
   onLockVault: () => void;
   isDarkMode: boolean;
   onToggleDarkMode: () => void;
@@ -29,6 +31,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentScreen,
   onNavigate,
   onOpenAdd,
+  onOpenDeploy,
   onLockVault,
   isDarkMode,
   onToggleDarkMode,
@@ -119,6 +122,17 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-xl hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors"
             >
               {isDarkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}
+            </button>
+
+            {/* Publish ke GitHub & Netlify */}
+            <button
+              type="button"
+              onClick={onOpenDeploy}
+              title="Publish ke GitHub & Netlify"
+              className="px-2.5 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl transition-colors flex items-center gap-1.5"
+            >
+              <CloudUpload className="w-4 h-4 text-emerald-500" />
+              <span className="hidden lg:inline">Publish</span>
             </button>
 
             {/* Quick Lock Button */}

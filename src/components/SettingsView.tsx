@@ -14,6 +14,7 @@ import {
   FileCode,
   Download,
   Upload,
+  CloudUpload,
 } from 'lucide-react';
 import { UserProfile, AutoLockTimeout, BiometryType } from '../types';
 
@@ -22,6 +23,7 @@ interface SettingsViewProps {
   onUpdateSettings: (updates: Partial<UserProfile>) => void;
   onRunDiagnostics: () => void;
   onOpenSupabase: () => void;
+  onOpenDeploy?: () => void;
   onLogout: () => void;
   onRequireBiometric: (action: string, callback: () => void) => void;
 }
@@ -31,6 +33,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   onUpdateSettings,
   onRunDiagnostics,
   onOpenSupabase,
+  onOpenDeploy,
   onLogout,
   onRequireBiometric,
 }) => {
@@ -265,6 +268,29 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           </div>
           <ChevronRight className="w-4 h-4 text-slate-400" />
         </div>
+
+        {/* Publish ke GitHub & Netlify */}
+        {onOpenDeploy && (
+          <div
+            onClick={onOpenDeploy}
+            className="p-4 flex items-center justify-between cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-850/50 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center">
+                <CloudUpload className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+                  Publish ke GitHub & Netlify
+                </h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  Panduan deploy online, CI/CD otomatis, dan konfigurasi environment variables
+                </p>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-slate-400" />
+          </div>
+        )}
 
         {/* Encrypted Vault Export */}
         <div

@@ -47,6 +47,7 @@ import { AutoLockOverlay } from './components/AutoLockOverlay';
 import { SettingsView } from './components/SettingsView';
 import { HelpCenterModal } from './components/HelpCenterModal';
 import { SupabaseConfigModal } from './components/SupabaseConfigModal';
+import { DeployModal } from './components/DeployModal';
 import { Navbar } from './components/Navbar';
 import { MobileDeviceFrame } from './components/MobileDeviceFrame';
 
@@ -79,6 +80,7 @@ export default function App() {
   const [detailEntry, setDetailEntry] = useState<PasswordEntry | null>(null);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isSupabaseModalOpen, setIsSupabaseModalOpen] = useState(false);
+  const [isDeployModalOpen, setIsDeployModalOpen] = useState(false);
 
   // Biometric Challenge
   const [biometricModalOpen, setBiometricModalOpen] = useState(false);
@@ -293,6 +295,7 @@ export default function App() {
             setEditingEntry(null);
             setIsAddModalOpen(true);
           }}
+          onOpenDeploy={() => setIsDeployModalOpen(true)}
           onLockVault={() => setIsVaultLocked(true)}
           isDarkMode={isDarkMode}
           onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
@@ -502,6 +505,7 @@ export default function App() {
               }}
               onRunDiagnostics={() => setScreen('diagnostic')}
               onOpenSupabase={() => setIsSupabaseModalOpen(true)}
+              onOpenDeploy={() => setIsDeployModalOpen(true)}
               onLogout={() => {
                 if (confirm('Apakah kamu yakin ingin logout dari VaultPass?')) {
                   setScreen('login');
@@ -649,6 +653,12 @@ export default function App() {
           showToast('Konfigurasi Supabase disimpan.');
           reloadEntries();
         }}
+      />
+
+      {/* Deploy to GitHub & Netlify Guide Modal */}
+      <DeployModal
+        isOpen={isDeployModalOpen}
+        onClose={() => setIsDeployModalOpen(false)}
       />
 
       {/* Help Center Modal */}
